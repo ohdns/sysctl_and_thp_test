@@ -192,4 +192,5 @@ exit 0;
 ## https://www.perforce.com/blog/tales-field-taming-transparent-huge-pages-linux
 ## https://blogs.oracle.com/linux/performance-issues-with-transparent-huge-pages-thp
 ## https://fritshoogland.wordpress.com/2017/07/25/linux-memory-usage/
+## https://discuss.aerospike.com/t/tuning-kernel-memory-for-performance/4195
 ##

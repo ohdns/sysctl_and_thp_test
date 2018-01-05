@@ -142,8 +142,8 @@ sed -i /vm\.min_free_kbytes/d /etc/sysctl.conf
 sed -i /vm\.vfs_cache_pressure/d /etc/sysctl.conf
 sed -i /vm\.admin_reserve_kbytes/d /etc/sysctl.conf
 sed -i /vm\.user_reserve_kbytes/d /etc/sysctl.conf
-sed -i /^##\/d /etc/sysctl.conf
-sed -i /^$\/d /etc/sysctl.conf
+sed -i /^##/d /etc/sysctl.conf
+sed -i /^$/d /etc/sysctl.conf
 sync
 #
 printf "\n##\n## updated ${NOW} based on ${MEM} memory.\nvm.min_free_kbytes=${MINFREE}\nvm.vfs_cache_pressure=1000\nvm.admin_reserve_kbytes=${RESERV}\nvm.user_reserve_kbytes=${RESERV}\n##\n##\n" >> /etc/sysctl.conf

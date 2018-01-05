@@ -9,7 +9,9 @@ At some point, the linux kernel enabled THP or Transparent Huge Pages by default
 
 <h4>Kernel Memory Tuning</h4>
 
-You could spend a solid weak reading religion unscientific arguments about swap, or simply set the correct values in the kernel based on the amount of memory you have and then remove or reduce your swap to less than a few hundred MB.
+You could spend a solid weak reading religious unscientific arguments about swap, or simply set the correct values in the kernel based on the amount of memory you have and then remove or reduce your swap to less than a few hundred MB.
+
+If you must use swap, consider added zswap.enabled=1 to your grub config to reduce disk IO when swapping. This enables lzo or lz4 compression (depending on kernel version and settings) for contents that would be swapped out to disk.
 
 TL;DR: The kernel waits too long to evacuate caches and also allows users to overcommit memory.  This results in race conditions that get the kernel or kernel modules wedged.  Let's fix that and end the insanity.
 
@@ -21,9 +23,11 @@ Save this script, chmod 755 and execute it with no arguments or "test" to test s
 
 Re-run the same tests at least a dozen times and note the results in your copy book.
 
-Determine if the performance and stability of your system improved.
+Determine if the performance and stability of your system remained the same or improved.
 
-If the performance and stability improved, then either implement the settings in your configuration management and / or orchestration system, or run the script again with the argument "perm".
+If the performance and stability remained the same or improved, then either implement the settings in your configuration management and / or orchestration system, or run the script again with the argument "perm".
+
+If the performance or stability of your system became worse, try to determine why using a scientific method such as gathering performance metrics of the hardware, operating system and applications.  Or simply reboot to clear the test settings.
 
 ___
 

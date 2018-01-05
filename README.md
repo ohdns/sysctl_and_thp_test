@@ -1,6 +1,18 @@
 # Sysctl and THP Test
 Test setting Transparent Huge Pages to madvise and correctly set kernel memory settings so we don't need swap.
 
+# Background
+
+<h4>THP or Transparent Huge Pages</h4>
+
+At some point, the linux kernel enabled THP or Transparent Huge Pages by default as a means to improve memory latency for systems and applications using large amounts of memory.  The theory was this would offload some work from the MMU and improve performance.  The unintended consequence was a greedy computation and offset that results in a slow memory leak within the page mapping in addition to memory IO lag spikes during defragmentation.  Many large memory applications suffer greatly with THP enabled by default.  The most common applications that suffer are Java, MongoDB, Postgres and MySQL.
+
+<h4>Kernel Memory Tuning</h4>
+
+You could spend a solid weak reading religion unscientific arguments about swap, or simply set the correct values in the kernel based on the amount of memory you have and then remove or reduce your swap to less than a few hundred MB.
+
+TL;DR: The kernel waits too long to evacuate caches and also allows users to overcommit memory.  This results in race conditions that get the kernel or kernel modules wedged.  Let's fix that and end the insanity.
+
 # Usage
 
 Prior to running this script, run your applications through memory, CPU and disk performance tests at least a dozen times and note the results in your copy book.

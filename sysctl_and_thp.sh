@@ -137,6 +137,10 @@ printf "\n\nOk, now start up your applications.\n\n"
 ## sure, I could do this in one line.  Easier to read this way.
 kernperm()
 {
+cp -p /etc/sysctl.conf ~/${NOW}.sysctl.conf.${NOW}
+printf "Backed up /etc/sysctl.conf to ~/${NOW}.sysctl.conf.${NOW}\n"
+cat /proc/cmdline > ~/${NOW}.cmdline.${NOW}
+printf "Backed up /proc/cmdline to ~/${NOW}.cmdline.${NOW}\n"
 sed -i /vm\.overcommit_ratio/d /etc/sysctl.conf
 sed -i /vm\.min_free_kbytes/d /etc/sysctl.conf
 sed -i /vm\.vfs_cache_pressure/d /etc/sysctl.conf

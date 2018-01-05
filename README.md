@@ -1,6 +1,18 @@
 # Sysctl and THP Test
 Test setting Transparent Huge Pages to madvise and correctly set kernel memory settings so we don't need swap.
 
+# Usage
+
+Prior to running this script, run your applications through memory, CPU and disk performance tests at least a dozen times and note the results in your copy book.
+
+Save this script, chmod 755 and execute it with no arguments or "test" to test settings.
+
+Re-run the same tests at least a dozen times and note the results in your copy book.
+
+Determine if the performance and stability of your system improved.
+
+If the performance and stability improved, then either implement the settings in your configuration management and / or orchestration system, or run the script again with the argument "perm".
+
 ___
 
 # Notational Conventions
@@ -24,7 +36,9 @@ It is assumed that your system reads /etc/sysctl.conf for kernel settings.
 
 ___
 
-License: WTFPL  see http://www.wtfpl.net/txt/copying/
+License: MIT
+
+Future License (when github adds it): WTFPL  see http://www.wtfpl.net/txt/copying/
 
 ___
 

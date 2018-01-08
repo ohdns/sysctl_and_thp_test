@@ -61,6 +61,17 @@ Future License (when github adds it): WTFPL  see http://www.wtfpl.net/txt/copyin
 
 ___
 
+ https://blog.nelhage.com/post/transparent-hugepages/    
+ https://access.redhat.com/solutions/46111
+ https://tobert.github.io/tldr/cassandra-java-huge-pages.html
+ https://alexandrnikitin.github.io/blog/transparent-hugepages-measuring-the-performance-impact/
+ https://www.perforce.com/blog/tales-field-taming-transparent-huge-pages-linux
+ https://blogs.oracle.com/linux/performance-issues-with-transparent-huge-pages-thp
+ https://fritshoogland.wordpress.com/2017/07/25/linux-memory-usage/
+ https://discuss.aerospike.com/t/tuning-kernel-memory-for-performance/4195
+
+___
+
 <p><b><br />Disclaimer: This software repository contains scripts that are for educational purposes only. The creator of this script assumes no liability for anything at all.  Use at your own peril.  Use of this script in a revenue or SLA impacting enviornment without following scientific proccess and approved change control may result in financial lossses.</b>
 <br /><br /></p>
 

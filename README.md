@@ -62,13 +62,21 @@ Future License (when github adds it): WTFPL  see http://www.wtfpl.net/txt/copyin
 ___
 
  https://blog.nelhage.com/post/transparent-hugepages/    
+<br />
  https://access.redhat.com/solutions/46111
+<br />
  https://tobert.github.io/tldr/cassandra-java-huge-pages.html
+<br />
  https://alexandrnikitin.github.io/blog/transparent-hugepages-measuring-the-performance-impact/
+<br />
  https://www.perforce.com/blog/tales-field-taming-transparent-huge-pages-linux
+<br />
  https://blogs.oracle.com/linux/performance-issues-with-transparent-huge-pages-thp
+<br />
  https://fritshoogland.wordpress.com/2017/07/25/linux-memory-usage/
+<br />
  https://discuss.aerospike.com/t/tuning-kernel-memory-for-performance/4195
+<br />
 
 ___
 

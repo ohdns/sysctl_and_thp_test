@@ -61,9 +61,13 @@ Future License (when github adds it): WTFPL  see http://www.wtfpl.net/txt/copyin
 
 ___
 
+
+<br />
  https://blog.nelhage.com/post/transparent-hugepages/    
 <br />
  https://access.redhat.com/solutions/46111
+<br />
+ https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/performance_tuning_guide/s-memory-tunables
 <br />
  https://tobert.github.io/tldr/cassandra-java-huge-pages.html
 <br />
@@ -77,6 +81,9 @@ ___
 <br />
  https://discuss.aerospike.com/t/tuning-kernel-memory-for-performance/4195
 <br />
+ https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html-single/performance_tuning_guide/index
+<br />
+
 
 ___
 

@@ -56,10 +56,14 @@ fi
 ##   intel_pstate=disable edd=off intel_idle.max_cstate=0 processor.max_cstate=0
 ##   elevator=noop acpi_pad.disable=1 zswap.enabled=1
 ##
+##  This turns off intel pstate, edd checks, essentially disables C-States
+##   sets the IO elevator to noop, disables an old ACPI bug, enables zswap.
+##
 ## and
 ##
 ##   nopti
 ## to get your performance back if you do not execute arbitrary or untrusted code.
+## assuming you diff review all 3rd party code, every time.
 ##
 ## Be sure to remove this one to get your 128MB back:
 ##   crashkernel

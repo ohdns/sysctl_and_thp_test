@@ -13,6 +13,8 @@ You could spend a solid weak reading religious unscientific arguments about swap
 
 If you must use swap, consider added zswap.enabled=1 to your grub config to reduce disk IO when swapping. This enables lzo or lz4 compression (depending on kernel version and settings) for contents that would be swapped out to disk.
 
+Also, if you must use swap, then make sure <a href="https://github.com/ohdns/loopback_crypt_swap">it is encrypted</a>.
+
 TL;DR: The kernel waits too long to evacuate caches and also allows users to overcommit memory.  This results in race conditions that get the kernel or kernel modules wedged.  Let's fix that and end the insanity.
 
 # Usage

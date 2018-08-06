@@ -1,6 +1,7 @@
 #!/bin/bash
 ##
-## 20180105
+## 20180806, passes ShellCheck
+##
 ##           To test some THP and kernel memory protection settings.
 ##           Once tested, these should be part of configuration management,
 ##           and/or orchestration.
@@ -12,14 +13,14 @@ set -o posix
 set -u
 PATH="/sbin:/usr/sbin:/bin:/usr/sbin";export PATH
 LANG=C;LC_ALL=C;S_TIME_FORMAT=ISO;export LANG LC_ALL S_TIME_FORMAT
-NOW=`date '+%Y%m%d%H%M%s'`;export NOW
+NOW=$(date '+%Y%m%d%H%M%s');export NOW
 if [ ! -s /etc/centos-release ] ; then
     echo "This does not appear to be CentOS. Sorry."
     exit 2;
 fi
 ##
-if [ ${UID} -ne 0 ] ; then
-printf "\n\nSorry, this must be run as root.\n\n"
+if [ "${UID}" -ne 0 ] ; then
+echo -en "\n\nSorry, this must be run as root.\n\n"
 exit 2;
 fi
 ##
@@ -46,8 +47,8 @@ thpperm()
 {
 ##
 ## set in grub too
-MADCOUNT=`grep -c madvise /proc/cmdline`
-if [ ${MADCOUNT} -lt 1 ] ; then
+MADCOUNT=$(grep -c madvise /proc/cmdline)
+if [ "${MADCOUNT}" -lt 1 ] ; then
 grubby --update-kernel=ALL --remove-args="transparent_hugepage"
 grubby --update-kernel=ALL --args="transparent_hugepage=madvise"
 fi
@@ -71,23 +72,23 @@ fi
 }
 
 ## calculate this regardless
-MEM=`grep ^MemTotal /proc/meminfo | awk {'print $2'}`
-if   [ ${MEM} -gt 2097152000 ] ; then
+MEM=$(grep ^MemTotal /proc/meminfo | awk '{print $2}')
+if   [ "${MEM}" -gt 2097152000 ] ; then
     MINFREE=32768000
     RESERV=524288
-elif [ ${MEM} -gt 1048576000 ] ; then
+elif [ "${MEM}" -gt 1048576000 ] ; then
     MINFREE=16384000
     RESERV=524288
-elif [ ${MEM} -gt 524288000 ] ; then
+elif [ "${MEM}" -gt 524288000 ] ; then
     MINFREE=8192000
     RESERV=524288
-elif [ ${MEM} -gt 262144000 ] ; then
+elif [ "${MEM}" -gt 262144000 ] ; then
     MINFREE=4096000
     RESERV=524288
-elif [ ${MEM} -gt 131072000 ] ; then
+elif [ "${MEM}" -gt 131072000 ] ; then
     MINFREE=1024000
     RESERV=524288
-elif [ ${MEM} -gt 1310720 ] ; then
+elif [ "${MEM}" -gt 1310720 ] ; then
     MINFREE=524288
     RESERV=262144
 else
@@ -117,7 +118,7 @@ echo 1 > /proc/sys/vm/compact_memory
 ## Use https://raw.githubusercontent.com/ohdns/ps_mem/master/ps_mem.py as root to get APP memory
 ## use free -m before App is up to see OS memory
 ##
-	sysctl -q -w vm.min_free_kbytes=${MINFREE}
+	sysctl -q -w vm.min_free_kbytes="${MINFREE}"
 ##
 ## Do this regardless.
 ## These should really be updated in /etc/sysctl.conf as well.
@@ -132,19 +133,19 @@ echo 1 > /proc/sys/vm/compact_memory
     sysctl -q -w vm.vfs_cache_pressure=1000
 ##
 ## user and admin early evacuation of caches and more.
-    sysctl -q -w vm.admin_reserve_kbytes=${RESERV}
-    sysctl -q -w vm.user_reserve_kbytes=${RESERV}
+    sysctl -q -w vm.admin_reserve_kbytes="${RESERV}"
+    sysctl -q -w vm.user_reserve_kbytes="${RESERV}"
 ##
-printf "\n\nOk, now start up your applications.\n\n"
+echo -en "\n\nOk, now start up your applications.\n\n"
 }
 
 ## sure, I could do this in one line.  Easier to read this way.
 kernperm()
 {
-cp -p /etc/sysctl.conf ~/${NOW}.sysctl.conf.${NOW}
-printf "Backed up /etc/sysctl.conf to ~/${NOW}.sysctl.conf.${NOW}\n"
-cat /proc/cmdline > ~/${NOW}.cmdline.${NOW}
-printf "Backed up /proc/cmdline to ~/${NOW}.cmdline.${NOW}\n"
+cp -p /etc/sysctl.conf ~/"${NOW}.sysctl.conf.${NOW}"
+echo -en "\nBacked up /etc/sysctl.conf to ~/${NOW}.sysctl.conf.${NOW}\n"
+cat /proc/cmdline > ~/"${NOW}.cmdline.${NOW}"
+echo -en "\nBacked up /proc/cmdline to ~/${NOW}.cmdline.${NOW}\n"
 sed -i /vm\.overcommit_ratio/d /etc/sysctl.conf
 sed -i /vm\.min_free_kbytes/d /etc/sysctl.conf
 sed -i /vm\.vfs_cache_pressure/d /etc/sysctl.conf
@@ -154,7 +155,7 @@ sed -i /^##/d /etc/sysctl.conf
 sed -i /^$/d /etc/sysctl.conf
 sync
 #
-printf "\n##\n## updated ${NOW} based on ${MEM} memory.\nvm.min_free_kbytes=${MINFREE}\nvm.vfs_cache_pressure=1000\nvm.admin_reserve_kbytes=${RESERV}\nvm.user_reserve_kbytes=${RESERV}\n##\n##\n" >> /etc/sysctl.conf
+echo -en "\n##\n## updated ${NOW} based on ${MEM} memory.\nvm.min_free_kbytes=${MINFREE}\nvm.vfs_cache_pressure=1000\nvm.admin_reserve_kbytes=${RESERV}\nvm.user_reserve_kbytes=${RESERV}\n##\n##\n" >> /etc/sysctl.conf
 sync
 /sbin/sysctl -e -p > /dev/null 2>&1
 }
@@ -163,21 +164,21 @@ set +u
 case "$1" in
 
 test)
-printf "\nSetting THP Test Settings.\n"
+echo -en "\nSetting THP Test Settings.\n"
 thptest;
-printf "\nSetting Kernel Test Settings.\n"
+echo -en "\nSetting Kernel Test Settings.\n"
 kerntest;
 ;;
 perm)
-printf "\nSetting THP Grub Perm Settings.\n"
+echo -en "\nSetting THP Grub Perm Settings.\n"
 thpperm;
-printf "\nSetting Kernel Sysctl Perm Settings.\n"
+echo -en "\nSetting Kernel Sysctl Perm Settings.\n"
 kernperm;
 ;;
 *)
-printf "\nSetting THP Test Settings.\n"
+echo -en "\nSetting THP Test Settings.\n"
 thptest;
-printf "\nSetting Kernel Test Settings.\n"
+echo -en "\nSetting Kernel Test Settings.\n"
 kerntest;
 ;;
 

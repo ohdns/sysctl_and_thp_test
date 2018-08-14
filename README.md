@@ -85,6 +85,12 @@ ___
 <br />
  https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html-single/performance_tuning_guide/index
 <br />
+ https://github.com/nodejs/node/issues/11077
+<br />
+ https://docs.splunk.com/Documentation/Splunk/7.1.2/ReleaseNotes/SplunkandTHP
+<br />
+ https://bugs.mysql.com/bug.php?id=84003
+<br />
 
 
 ___
